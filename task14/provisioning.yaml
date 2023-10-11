@@ -62,20 +62,20 @@
     - name: Deploy NTP conf file for CentOS
       template:
          src: templates/ntp_centos.conf.j2
-         dest: /etc/chrony.conf
+         dest: "{{ntp_path_centos}}"
       when: ansible_os_family == "CentOS"
       notify: Restart NTP on CentOS
 
     - name: Deploy NTP conf file for Ubuntu
       template:
          src: templates/ntp_ubuntu.conf.j2
-         dest: /etc/ntp.conf
+         dest: "{{ntp_path_ubuntu}}"
       when: ansible_os_family == "Ubuntu"
       notify: Restart NTP on Ubuntu
 
     - name: Dir for dev data
       file:
-        path: /opt/devdata
+        path: "{{file_path}}"
         state: directory
         mode: 0775
     
